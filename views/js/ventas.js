@@ -26,15 +26,3 @@ $(function() {
     cb(start, end);
 
 });
-this.locale = {
-    direction: 'ltr',
-    format: moment.localeData().longDateFormat('L'),
-    separator: ' - ',
-    applyLabel: 'Aceptar',
-    cancelLabel: 'Cancelar',
-    weekLabel: 'W',
-    customRangeLabel: 'Personalizado',
-    daysOfWeek: moment.weekdaysMin(),
-    monthNames: moment.monthsShort(),
-    firstDay: moment.localeData().firstDayOfWeek()
-};
