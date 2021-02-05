@@ -66,6 +66,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="busqueda" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>busqueda</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="Informe-caja" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Informe Caja</p>

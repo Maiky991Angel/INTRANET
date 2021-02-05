@@ -48,6 +48,7 @@
                     $_GET['ruta'] == "Informe-caja"|| 
                     $_GET['ruta'] == "Informe-Saldos-Bodegas"|| 
                     $_GET['ruta'] == "Informe-Devoluciones"|| 
+                    $_GET['ruta'] == "busqueda"|| 
                     $_GET['ruta'] == "Informe-Pedido"){
                                             
                     include "models/".$_GET['ruta'].".php";
