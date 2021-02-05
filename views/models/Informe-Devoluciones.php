@@ -1,3 +1,8 @@
+<?php
+                    include ("model/conexion.php");
+
+?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -67,7 +72,6 @@
 
                         <?php
                     
-                    include ("model/conexion.php");
 
                     $sql = "SELECT top 5
     

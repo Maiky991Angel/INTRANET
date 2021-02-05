@@ -1,3 +1,7 @@
+<?php
+ include ("model/conexion.php");
+?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -21,20 +25,36 @@
             <div class="card-header">
                 <h3 class="card-title">Reporte de Venta </h3>
             </div>
-            
+            <!-- 
             <div class="input-group">
-            <div id="reportrange"
-                style="background: #fff; cursor: pointer; padding: 5px 8px; margin-left: 20px; margin-top: 25px; border: 1px solid #ccc; width: 300px">
-                <i class="fa fa-calendar"></i>&nbsp;
-                <span></span> <i class="fa fa-caret-down"></i>
-            </div>
-            </div>
+                <div id="reportrange"
+                    style="background: #fff; cursor: pointer; padding: 5px 8px; margin-left: 20px; margin-top: 25px; border: 1px solid #ccc; width: 300px">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
+                </div>
+            </div> -->
 
-            <div class="card-body">
+
+
+
+
+            <form action="" method="GET" style=" padding: 5px 8px; margin-left: 5px; margin-top: 25px; width: 250px">
+
+                <div class="col-auto">
+                    <input type="text" name="busqueda" class="form-control" id="inputPassword2" placeholder="Buscar...">
+                </div>
+
+                <div class="col-auto" style="margin-top: 10px;">
+                    <button type="submit" name="enviar" class="btn btn-primary mb-3">Enviar</button>
+                </div>
+            </form>
+
+
+
+            <div class="card-body" style="margin-top: -30px;">
                 <table id="example1" class="table table-bordered table-striped table-responsive display nowrap">
                     <thead>
             </div>
-
             <tr>
                 <th>Documento</th>
                 <th>fecha</th>
@@ -72,10 +92,21 @@
 
             <tbody>
                 <?php
-                    
-                    include ("model/conexion.php");
 
-                    $sql = "SELECT top 100
+
+           
+                if (isset($_GET['enviar'])) {
+                    $busqueda = $_GET['busqueda'];
+
+                    $consult= $conn->query(" SELECT * FROM FactuXX WHERE Encabezado.nit LIKE '%buqueda%' ");
+
+                    while ($row = $consul->fetch_array()) {
+                            echo  $row['Encabezado.ni'];
+                    }
+                }
+
+
+                    $sql = "SELECT  top 20
 
                     'Ventas' As Documento, Cast(Encabezado.Fecha As Varchar(11)) As 'fecha', Rtrim(Ltrim(Clientes.Razon_Social)) As 'Cliente'
                     , Rtrim(Ltrim(Vendedor.Nombre))  As 'Vendedor', Rtrim(Ltrim(Encabezado.Bodega)) + ' - ' + Rtrim(Ltrim(Bodegas.Nombre)) As 'Bodega'
@@ -126,14 +157,17 @@
                     Left Outer Join DimDistribuidor      On DimDistribuidor.Categoria = DimSectorEconomico.Categoria
                     Left Outer Join DimRegiones          On DimRegiones.CodRegion = DimSectorEconomico.CodRegion
                     Left Outer Join DimCiudad            On Zonas.CodCiudad = DimCiudad.CodCiudad
-                    Left Outer Join DimMarcaProductos    On DimMarcaProductos.CodMarca = Kardex.CodMarca";
-
+                    Left Outer Join DimMarcaProductos    On DimMarcaProductos.CodMarca = Kardex.CodMarca
                     
-
+                    Where Encabezado.Anulado = 0 And Detalle.Anulado = 0 And Encabezado.Espera = 0
+                    ";
+                    
+                     $sql2 = "And Encabezado.nit = ''";
+                    //  $concatenar = $sql + $sql2; 
                      $consultar=sqlsrv_query($conn, $sql);
                      while ($fila=sqlsrv_fetch_array($consultar)){
+
                           echo'
-                           
                           
                                 <tr>
                                  <td>'.$fila['Documento'].'</td>
