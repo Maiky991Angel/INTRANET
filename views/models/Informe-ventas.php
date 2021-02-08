@@ -37,7 +37,7 @@
             <form action="" method="GET" style=" padding: 5px 8px; margin-left: 5px; margin-top: 25px; width: 250px">
 
                 <div class="col-auto">
-                    <input type="text" name="busqueda" class="form-control" id="inputPassword2" placeholder="Buscar...">
+                    <input type="text" name="busqueda" class="form-control" placeholder="Buscar...">
                 </div>
 
                 <div class="col-auto" style="margin-top: 10px;">
@@ -90,20 +90,9 @@
                 <?php
 
 
-           
-                    // if (isset($_GET['enviar'])) {
-                    //     $busqueda = $_GET['busqueda'];
-                        
-                    //     $consult= $conn->sqlsrv_query(" SELECT * FROM Factura1_2000  WHERE Encabezado.nit LIKE '%busqueda%' ");
-                    //     var_dump($consult);
-                    //     while ($row = $consul->fetch_array()) {
-                    //             echo  $row['Encabezado.nit'];
-                    //     }
-                    // }
 
-
-                     $sql = "SELECT  top 20
-
+                     $sql = "SELECT  top 10
+                     
                      'Ventas' As Documento, Cast(Encabezado.Fecha As Varchar(11)) As 'fecha', Rtrim(Ltrim(Clientes.Razon_Social)) As 'Cliente'
                      , Rtrim(Ltrim(Vendedor.Nombre))  As 'Vendedor', Rtrim(Ltrim(Encabezado.Bodega)) + ' - ' + Rtrim(Ltrim(Bodegas.Nombre)) As 'Bodega'
                      , Rtrim(Ltrim(Departamentos.Descripcion)) As 'Departamento', Convert(Varchar(2), Clientes.Precio_de_Venta) As 'Lista_Precio'
@@ -208,6 +197,17 @@
          
                               }
          
+
+                                      
+                        if (isset($_GET['enviar'])) {
+                        $busqueda = $_GET['busqueda'];
+                        
+                        $consult= $conn->sqlsrv_query(" SELECT * FROM %sql% LIKE '%busqueda%' ");
+                        var_dump($consult);
+                        while ($row = $consul->fetch_array()) {
+                                echo  $row['Encabezado.nit'];
+                        }
+                    }
                              ?>
             </tbody>
 
