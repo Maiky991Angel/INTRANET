@@ -131,6 +131,7 @@
                         Left Outer Join DimCiudad            On Zonas.CodCiudad = DimCiudad.CodCiudad  
                         Left Outer Join DimMarcaProductos    On DimMarcaProductos.CodMarca = Kardex.CodMarca";
 
+
                      $consultar=sqlsrv_query($conn, $sql);
                      while ($fila=sqlsrv_fetch_array($consultar)){
                           echo'
