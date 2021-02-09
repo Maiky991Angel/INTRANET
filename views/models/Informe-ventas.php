@@ -34,14 +34,14 @@
                 </div>
             </div> -->
 
-            <form action="" method="GET" style=" padding: 5px 8px; margin-left: 5px; margin-top: 25px; width: 250px">
+            <form action="" id="from" method="GET" style=" padding: 5px 8px; margin-left: 5px; margin-top: 25px; width: 250px">
 
                 <div class="col-auto">
-                    <input type="text" name="busqueda" class="form-control" placeholder="Buscar...">
+                    <input type="text" name="busqueda" id="busqueda" class="form-control" placeholder="Buscar...">
                 </div>
 
                 <div class="col-auto" style="margin-top: 10px;">
-                    <button type="submit" name="enviar" class="btn btn-primary mb-3">Enviar</button>
+                    <button type="submit" name="enviar" id="enviar" class="btn btn-primary mb-3">Enviar</button>
                 </div>
             </form>
 
@@ -88,7 +88,17 @@
 
             <tbody>
                 <?php
+                    if (isset($_GET['busqueda'])) {
+                        $busqueda = $_GET['busqueda'];
+                        
+                        $consult= $conn->sqlsrv_query(" SELECT FactuXX FROM Encabezado.nit LIKE '%.busqueda.%' ");
+                        var_dump($consult);
+                        while ($row = $consult->sqlsrv_fetch_array()) {
+                                echo  $row['Encabezado.nit'];
+                        }
+                    }else{
 
+                    
 
 
                      $sql = "SELECT  top 10
@@ -190,24 +200,9 @@
                            
                                   </tr>
                                 
-                                     
-          
                                   ';
-         
-         
                               }
-         
-
-                                      
-                        if (isset($_GET['enviar'])) {
-                        $busqueda = $_GET['busqueda'];
-                        
-                        $consult= $conn->sqlsrv_query(" SELECT * FROM %sql% LIKE '%busqueda%' ");
-                        var_dump($consult);
-                        while ($row = $consul->fetch_array()) {
-                                echo  $row['Encabezado.nit'];
-                        }
-                    }
+                            }   
                              ?>
             </tbody>
 
